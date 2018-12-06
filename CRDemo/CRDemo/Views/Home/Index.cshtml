@@ -1,0 +1,42 @@
+﻿@model IEnumerable<CRDemo.Models.Supplier>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2 style="font-family:'Futura Md BT'">Index</h2>
+
+<p>
+    <a class="btn btn-primary" href="@Url.Action("exportSupplier")" style="font-family:'Futura Md BT'">Reporting</a>
+</p>
+<table class="table table-bordered compact hover" style="font-family:'Futura Md BT'" id="datatables">
+    <thead style="font-style:italic; font-family:'Futura Md BT';">
+        <tr style="background-color:black; color:white">
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody class="tbody" style="font-family:'Futura Md BT'"></tbody>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                </td>
+            </tr>
+        }
+
+</table>
+
+@section Scripts{
+<link href="~/Content/datatables/jquery.dataTables.min.css" rel="stylesheet" />
+<script src="~/Content/datatables/jquery.dataTables.min.js"></script>
+    }
