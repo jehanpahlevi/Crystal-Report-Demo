@@ -4,6 +4,8 @@
     ViewBag.Title = "Index";
 }
 
+<body style="background:linear-gradient(to bottom, #ccccff 0%, #ffffff 100%)"></body>
+
 <h2 style="font-family:'Futura Md BT'">Index</h2>
 
 <p>
@@ -18,23 +20,22 @@
             <th>
                 @Html.DisplayNameFor(model => model.Name)
             </th>
-            @*<th>Action</th>*@
+            @*<th></th>*@
         </tr>
     </thead>
 
-        @foreach (var item in Model)
+        @foreach (var supplier in Model)
         {
             <tr>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Id)
+                    @Html.DisplayFor(modelSupplier => supplier.Id)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Name)
+                    @Html.DisplayFor(modelSupplier => supplier.Name)
                 </td>
                 @*<td>
-                    @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
-                    @Html.ActionLink("Details", "Details", new { id = item.Id }) |
-                    @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                    @Html.ActionLink("Edit", "Edit", new { id = supplier.Id }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = supplier.Id })
                 </td>*@
             </tr>
         }
@@ -43,4 +44,7 @@
 @section Scripts{
 <link href="~/Content/datatables/jquery.dataTables.min.css" rel="stylesheet" />
 <script src="~/Content/datatables/jquery.dataTables.min.js"></script>
+<script src="~/Content/sweetalert/sweetalert.min.js"></script>
+<link href="~/Content/sweetalert/sweetalert.css" rel="stylesheet" />
+@Scripts.Render("~/bundles/jqueryval")
     }

@@ -26,5 +26,6 @@ namespace CRDemo.Models
         }
     
         public virtual DbSet<Supplier> Suppliers { get; set; }
+        public virtual DbSet<Item> Items { get; set; }
     }
 }

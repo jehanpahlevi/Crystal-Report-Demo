@@ -18,6 +18,24 @@ namespace CRDemo.Controllers
             return View(supplierlist);
         }
 
+        public ActionResult Create()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult CreatePost([Bind(Include = "Id,Name")] Supplier supplier)
+        {
+            if (ModelState.IsValid)
+            {
+                _context.Suppliers.Add(supplier);
+                _context.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            return View(supplier);
+        } 
+
         public ActionResult exportSupplier()
         {
             List<Supplier> allSuppliers = new List<Supplier>();

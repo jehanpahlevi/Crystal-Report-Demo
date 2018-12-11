@@ -6,8 +6,37 @@
     </Key>
     <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Items" Relationship="CRDemoModel.FK_Item_Supplier" FromRole="Supplier" ToRole="Item" />
   </EntityType>
   <EntityContainer Name="MyContext" annotation:LazyLoadingEnabled="true">
     <EntitySet Name="Suppliers" EntityType="Self.Supplier" />
+    <EntitySet Name="Items" EntityType="CRDemoModel.Item" />
+    <AssociationSet Name="FK_Item_Supplier" Association="CRDemoModel.FK_Item_Supplier">
+      <End Role="Supplier" EntitySet="Suppliers" />
+      <End Role="Item" EntitySet="Items" />
+    </AssociationSet>
   </EntityContainer>
+  <EntityType Name="Item">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Supplier_Id" Type="Int32" />
+    <Property Name="Stock" Type="Int32" />
+    <Property Name="Price" Type="Int32" />
+    <NavigationProperty Name="Supplier" Relationship="CRDemoModel.FK_Item_Supplier" FromRole="Item" ToRole="Supplier" />
+  </EntityType>
+  <Association Name="FK_Item_Supplier">
+    <End Type="CRDemoModel.Supplier" Role="Supplier" Multiplicity="0..1" />
+    <End Type="CRDemoModel.Item" Role="Item" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Supplier">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Item">
+        <PropertyRef Name="Supplier_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
 </Schema>
